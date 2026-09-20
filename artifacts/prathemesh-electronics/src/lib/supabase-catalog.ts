@@ -62,11 +62,7 @@ let supabase: SupabaseClient | null = null;
 function getSupabase() {
   const url = import.meta.env.VITE_SUPABASE_URL;
   const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-  if (!url || !anonKey) {
-    throw new Error(
-      'Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to the deployment environment.',
-    );
-  }
+  if (!url || !anonKey) return null;
   if (!supabase) supabase = createClient(url, anonKey);
   return supabase;
 }
@@ -125,6 +121,13 @@ async function listProducts(params?: {
   limit?: number;
 }) {
   const client = getSupabase();
+  if (!client) {
+    const query = new URLSearchParams();
+    if (params?.q) query.set('q', params.q);
+    if (params?.category) query.set('category', params.category);
+    query.set('limit', String(params?.limit ?? 12));
+    return fetchReplitCatalog<Product[]>(`/products?${query.toString()}`);
+  }
   let request = client
     .from('products')
     .select('*')
@@ -155,7 +158,9 @@ async function listProducts(params?: {
 }
 
 async function getProductBySlug(slug: string) {
-  const { data, error } = await getSupabase()
+  const client = getSupabase();
+  if (!client) return fetchReplitCatalog<Product>(`/products/${encodeURIComponent(slug)}`);
+  const { data, error } = await client
     .from('products')
     .select('*')
     .eq('slug', slug)
@@ -169,7 +174,9 @@ async function getProductBySlug(slug: string) {
 }
 
 async function listCategories() {
-  const { data, error } = await getSupabase()
+  const client = getSupabase();
+  if (!client) return fetchReplitCatalog<Category[]>('/categories');
+  const { data, error } = await client
     .from('categories')
     .select('*')
     .order('name');
@@ -181,7 +188,9 @@ async function listCategories() {
 }
 
 async function listDeals() {
-  const { data, error } = await getSupabase()
+  const client = getSupabase();
+  if (!client) return fetchReplitCatalog<Deal[]>('/deals');
+  const { data, error } = await client
     .from('deals')
     .select('*')
     .order('id');
@@ -201,7 +210,12 @@ async function listDeals() {
 }
 
 async function listBrands() {
-  const { data, error } = await getSupabase()
+  const client = getSupabase();
+  if (!client) {
+    const home = await fetchReplitCatalog<HomeData>('/storefront/home');
+    return home.brands;
+  }
+  const { data, error } = await client
     .from('brands')
     .select('name')
     .order('name');
