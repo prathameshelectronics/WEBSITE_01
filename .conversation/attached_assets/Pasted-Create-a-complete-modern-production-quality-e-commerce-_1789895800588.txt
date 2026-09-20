@@ -1,0 +1,1615 @@
+Create a complete, modern, production-quality e-commerce website for an electronics store named **“Prathemesh Electronics.”**
+
+The website should feel like a premium, trustworthy, high-conversion electronics marketplace with the feature depth expected from a large e-commerce platform, while using a completely original visual identity and layout.
+
+## 1. BRAND IDENTITY
+
+Website name:
+**Prathemesh Electronics**
+
+Tagline:
+**“Powering Your World with Better Technology.”**
+
+Business category:
+Electronics, computers, smartphones, accessories, appliances, gaming, smart devices, and technology products.
+
+Create a professional technology-focused brand identity using:
+
+* Modern typography
+* Clean spacing
+* Premium electronics aesthetic
+* Subtle gradients
+* Professional icons
+* High-quality product imagery
+* Responsive layouts
+* Smooth animations
+* Strong visual hierarchy
+
+Do NOT copy Amazon's exact interface, logo, branding, colors, or proprietary design. Take inspiration only from the functionality expected from a modern large-scale e-commerce website.
+
+---
+
+# 2. TECHNOLOGY STACK
+
+Build the website using a modern production-ready stack.
+
+Preferred:
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+* Modern component architecture
+* Responsive design
+* PostgreSQL or another scalable database
+* Secure authentication
+* REST API or server actions
+* Stripe/Razorpay-ready payment architecture
+* Cloud image storage
+* Search indexing
+* SEO optimization
+
+The architecture should be modular and scalable so that new products, categories, users, orders, sellers, and features can easily be added later.
+
+---
+
+# 3. MAIN WEBSITE STRUCTURE
+
+Create these major sections:
+
+### Header
+
+Include:
+
+* Prathemesh Electronics logo
+* Location selector
+* Search bar
+* Search suggestions
+* Category selector
+* Voice-search icon
+* Account/Login
+* Orders
+* Wishlist
+* Shopping cart
+* Mobile hamburger menu
+
+Desktop header should have multiple levels:
+
+Top utility bar:
+
+* Customer service
+* Track order
+* Offers
+* Sell with us
+* Download app
+
+Main header:
+
+* Logo
+* Location
+* Large search bar
+* Account
+* Orders
+* Wishlist
+* Cart
+
+Navigation bar:
+
+* All Categories
+* Mobiles
+* Laptops
+* Computers
+* TVs
+* Audio
+* Gaming
+* Cameras
+* Accessories
+* Smart Home
+* Appliances
+* Deals
+
+---
+
+# 4. HOMEPAGE
+
+Create a highly polished homepage.
+
+Sections:
+
+### Hero Banner
+
+Large promotional carousel with:
+
+* Electronics promotions
+* Smartphone launches
+* Laptop deals
+* Gaming products
+* Festival sales
+* Limited-time offers
+
+Include:
+
+* CTA buttons
+* Shop Now
+* View Deals
+* Explore Collection
+
+Hero banners should automatically rotate but also support manual navigation.
+
+---
+
+# 5. CATEGORY SECTIONS
+
+Create visual category cards for:
+
+* Smartphones
+* Laptops
+* Tablets
+* Desktop Computers
+* Monitors
+* Televisions
+* Headphones
+* Earbuds
+* Speakers
+* Cameras
+* Gaming Consoles
+* Gaming Accessories
+* Smartwatches
+* Smart Home
+* Routers
+* Printers
+* Storage Devices
+* Computer Accessories
+* Mobile Accessories
+* Power Banks
+* Chargers
+* Cables
+* Home Appliances
+* Kitchen Electronics
+* Air Conditioners
+* Refrigerators
+* Washing Machines
+
+Each category should have:
+
+* Image
+* Category name
+* Product count
+* Hover animation
+* Link to category page
+
+---
+
+# 6. PRODUCT CARDS
+
+Create premium reusable product cards.
+
+Each card should display:
+
+* Product image
+* Brand
+* Product name
+* Short specifications
+* Star rating
+* Review count
+* Original price
+* Discounted price
+* Discount percentage
+* EMI information
+* Delivery estimate
+* Stock status
+* Wishlist button
+* Quick-view button
+* Add to cart button
+* Buy now button
+* Compare checkbox
+
+Add badges such as:
+
+* Best Seller
+* New
+* Limited Deal
+* Hot Deal
+* Recommended
+* Trending
+* Exclusive
+* Low Stock
+
+Cards should have smooth hover effects.
+
+---
+
+# 7. PRODUCT DETAILS PAGE
+
+Create a detailed product page similar in functionality to major electronics marketplaces.
+
+Include:
+
+### Product Gallery
+
+* Multiple product images
+* Zoom
+* Full-screen viewer
+* Thumbnail navigation
+* Product video
+* 360° view support
+
+### Product Information
+
+* Brand
+* Product title
+* Model number
+* Rating
+* Reviews
+* SKU
+* Availability
+* Warranty information
+
+### Pricing
+
+* MRP
+* Selling price
+* Discount
+* Coupon
+* Bank offers
+* EMI options
+* Exchange offers
+
+### Purchase Options
+
+* Quantity selector
+* Add to Cart
+* Buy Now
+* Add to Wishlist
+
+### Delivery
+
+Allow the customer to enter PIN/ZIP code.
+
+Show:
+
+* Estimated delivery date
+* Delivery fee
+* Free delivery eligibility
+* COD availability
+* Installation availability
+
+### Product Variants
+
+Support:
+
+* Color
+* Storage
+* RAM
+* Size
+* Configuration
+* Model
+* Capacity
+
+Changing a variant should update:
+
+* Image
+* Price
+* Stock
+* SKU
+
+---
+
+# 8. PRODUCT DESCRIPTION
+
+Include:
+
+* Overview
+* Features
+* Specifications
+* Technical details
+* Compatibility
+* What's included in the box
+* Warranty
+* Manufacturer information
+
+Create expandable sections for specifications.
+
+---
+
+# 9. PRODUCT COMPARISON
+
+Create a powerful product comparison system.
+
+Users can compare products side-by-side.
+
+Show:
+
+* Price
+* Brand
+* Rating
+* Processor
+* RAM
+* Storage
+* Display
+* Battery
+* Camera
+* Connectivity
+* Warranty
+* Dimensions
+* Weight
+* Key features
+
+Highlight differences between products.
+
+---
+
+# 10. SEARCH SYSTEM
+
+Create an advanced search experience.
+
+Features:
+
+* Instant search suggestions
+* Autocomplete
+* Search history
+* Popular searches
+* Trending searches
+* Brand suggestions
+* Category suggestions
+* Product suggestions
+* Typo tolerance
+* Filters
+* Sorting
+
+Search results should update quickly.
+
+Support natural search queries such as:
+
+“gaming laptop under ₹80,000”
+
+“wireless earbuds under ₹5,000”
+
+“best 55 inch 4K TV”
+
+“iPhone with 256GB”
+
+---
+
+# 11. FILTERING
+
+Create advanced product filters.
+
+Filters should dynamically depend on category.
+
+Common filters:
+
+* Price
+* Brand
+* Rating
+* Availability
+* Discount
+* Offers
+* Delivery
+* Color
+
+Electronics-specific filters:
+
+* RAM
+* Storage
+* Processor
+* Screen size
+* Resolution
+* Refresh rate
+* Battery
+* Camera
+* Connectivity
+* Operating system
+* Power consumption
+
+Allow multiple filters simultaneously.
+
+---
+
+# 12. SORTING
+
+Include:
+
+* Relevance
+* Popularity
+* Price: Low to High
+* Price: High to Low
+* Customer Rating
+* Newest
+* Biggest Discount
+* Best Selling
+
+---
+
+# 13. SHOPPING CART
+
+Create a complete shopping cart.
+
+Features:
+
+* Add/remove products
+* Quantity controls
+* Variant display
+* Save for later
+* Move to wishlist
+* Apply coupon
+* Remove coupon
+* Price breakdown
+* Delivery estimate
+* Taxes
+* Shipping charges
+* Discounts
+* Total amount
+
+Show recommended products below the cart.
+
+---
+
+# 14. CHECKOUT
+
+Create a multi-step but simple checkout.
+
+Steps:
+
+1. Login/Guest checkout
+2. Delivery address
+3. Delivery method
+4. Payment
+5. Order review
+6. Order confirmation
+
+Address fields:
+
+* Full name
+* Phone
+* House/building
+* Street
+* City
+* State
+* PIN code
+* Landmark
+
+Allow:
+
+* Add address
+* Edit address
+* Delete address
+* Set default address
+
+---
+
+# 15. PAYMENT SYSTEM
+
+Design payment infrastructure for:
+
+* Credit cards
+* Debit cards
+* UPI
+* Net banking
+* Wallets
+* Cash on Delivery
+* EMI
+* Buy Now Pay Later
+
+Integrate payment gateway architecture that can support **Razorpay** and/or **Stripe**.
+
+Never store raw card information.
+
+Show secure payment indicators.
+
+---
+
+# 16. ORDER SYSTEM
+
+Create a complete order management system.
+
+Order statuses:
+
+* Order Placed
+* Payment Confirmed
+* Processing
+* Packed
+* Shipped
+* Out for Delivery
+* Delivered
+* Cancelled
+* Return Requested
+* Returned
+* Refunded
+
+Create an order tracking timeline.
+
+Include:
+
+* Order number
+* Products
+* Quantity
+* Price
+* Delivery address
+* Payment method
+* Invoice
+* Tracking number
+* Estimated delivery
+* Support button
+
+---
+
+# 17. USER ACCOUNT
+
+Create a customer dashboard.
+
+Sections:
+
+* Profile
+* My Orders
+* Track Orders
+* Wishlist
+* Saved Addresses
+* Payment Methods
+* Coupons
+* Reviews
+* Returns
+* Refunds
+* Notifications
+* Recently Viewed
+* Recommended Products
+* Account Settings
+* Security
+
+---
+
+# 18. AUTHENTICATION
+
+Support:
+
+* Email/password
+* Phone number
+* OTP
+* Google login
+* Secure logout
+* Forgot password
+* Reset password
+* Email verification
+* Phone verification
+* Session management
+
+---
+
+# 19. WISHLIST
+
+Users should be able to:
+
+* Add products
+* Remove products
+* Move product to cart
+* See price changes
+* See stock changes
+* Share wishlist
+
+---
+
+# 20. REVIEWS AND RATINGS
+
+Create a complete review system.
+
+Customers can:
+
+* Give star rating
+* Write review
+* Upload images
+* Upload videos
+* Mark review helpful
+* Report review
+
+Display:
+
+* Average rating
+* Rating distribution
+* Verified purchase badge
+* Review sorting
+* Review filtering
+
+Sorting:
+
+* Most recent
+* Most helpful
+* Highest rating
+* Lowest rating
+* With images
+
+---
+
+# 21. COUPONS AND OFFERS
+
+Create coupon functionality.
+
+Support:
+
+* Percentage discounts
+* Fixed discounts
+* Minimum order value
+* Category-specific coupons
+* Brand-specific coupons
+* First-order discounts
+* Festival offers
+* Limited-use coupons
+* Expiry dates
+
+Show available coupons on product and checkout pages.
+
+---
+
+# 22. DEALS PAGE
+
+Create a dedicated deals page.
+
+Sections:
+
+* Today's Deals
+* Flash Sale
+* Lightning Deals
+* Weekend Deals
+* Electronics Deals
+* Clearance
+* Bank Offers
+* Festival Offers
+
+Use countdown timers for limited-time promotions.
+
+---
+
+# 23. FLASH SALE
+
+Create a visually attractive flash-sale section.
+
+Display:
+
+* Countdown timer
+* Product cards
+* Discount
+* Stock remaining
+* Progress bar
+* Sale end time
+
+Example:
+
+“Flash Sale Ends In: 02:45:19”
+
+---
+
+# 24. RECOMMENDATION ENGINE
+
+Create personalized recommendations.
+
+Sections:
+
+* Recommended For You
+* Based on Your Browsing
+* Frequently Bought Together
+* Customers Also Viewed
+* Similar Products
+* Trending Near You
+* Recently Viewed
+* Because You Bought...
+
+Use product/category behavior to personalize recommendations.
+
+---
+
+# 25. RECENTLY VIEWED
+
+Store recently viewed products for logged-in users.
+
+For guest users, store them locally.
+
+Allow:
+
+* Clear history
+* Open product
+* Add to cart
+* Add to wishlist
+
+---
+
+# 26. SELLER MARKETPLACE
+
+Make the platform scalable for multiple sellers.
+
+Create seller registration.
+
+Seller dashboard should include:
+
+* Seller profile
+* Products
+* Add product
+* Edit product
+* Inventory
+* Orders
+* Returns
+* Sales
+* Revenue
+* Customers
+* Reviews
+* Coupons
+* Promotions
+* Analytics
+* Payouts
+* Seller settings
+
+Seller product fields:
+
+* Product name
+* Brand
+* Category
+* Description
+* Specifications
+* Images
+* Price
+* MRP
+* Tax
+* Inventory
+* SKU
+* Warranty
+* Shipping information
+
+---
+
+# 27. ADMIN DASHBOARD
+
+Create a professional admin panel.
+
+Dashboard cards:
+
+* Total Revenue
+* Today's Sales
+* Total Orders
+* Pending Orders
+* Customers
+* Sellers
+* Products
+* Low Stock
+* Returns
+* Refunds
+
+Charts:
+
+* Revenue over time
+* Orders over time
+* Sales by category
+* Top products
+* Top brands
+* Customer growth
+* Seller performance
+
+Admin features:
+
+### Product Management
+
+* Add
+* Edit
+* Delete
+* Approve
+* Bulk upload
+* Import/export
+
+### Category Management
+
+* Create
+* Edit
+* Delete
+* Reorder
+
+### Order Management
+
+* View
+* Update status
+* Refund
+* Cancel
+* Return
+
+### Customer Management
+
+* Search
+* View
+* Edit
+* Suspend
+* View order history
+
+### Seller Management
+
+* Approve seller
+* Suspend seller
+* View performance
+* Manage payouts
+
+### Coupon Management
+
+* Create
+* Edit
+* Expire
+* Usage statistics
+
+### Banner Management
+
+* Create
+* Edit
+* Schedule
+* Activate/deactivate
+
+---
+
+# 28. INVENTORY MANAGEMENT
+
+Create inventory tracking.
+
+Features:
+
+* Stock quantity
+* Reserved stock
+* Available stock
+* Low-stock alerts
+* Out-of-stock status
+* Inventory history
+* SKU management
+* Warehouse support
+* Stock adjustments
+
+---
+
+# 29. NOTIFICATIONS
+
+Create notification infrastructure.
+
+Support:
+
+* Email
+* SMS
+* Push notifications
+* In-app notifications
+
+Notifications for:
+
+* Order confirmation
+* Payment
+* Shipping
+* Delivery
+* Cancellation
+* Refund
+* Wishlist price drop
+* Back in stock
+* Promotions
+
+---
+
+# 30. CUSTOMER SUPPORT
+
+Create a dedicated support center.
+
+Features:
+
+* Help center
+* FAQ
+* Contact support
+* Live chat
+* Support tickets
+* Order-related support
+* Return support
+* Refund support
+
+Add chatbot-ready architecture.
+
+---
+
+# 31. RETURNS AND REFUNDS
+
+Create complete return functionality.
+
+Customers can:
+
+* Request return
+* Select reason
+* Upload images
+* Choose pickup
+* Track return
+* View refund status
+
+Return statuses:
+
+* Requested
+* Approved
+* Pickup Scheduled
+* Picked Up
+* Quality Check
+* Refund Initiated
+* Refund Completed
+* Rejected
+
+---
+
+# 32. MOBILE EXPERIENCE
+
+The website must be completely responsive.
+
+Optimize for:
+
+* Desktop
+* Laptop
+* Tablet
+* Mobile
+
+On mobile:
+
+* Sticky bottom navigation
+* Search at top
+* Cart icon
+* Account icon
+* Wishlist
+* Category navigation
+* Touch-friendly controls
+* Swipeable product carousels
+* Mobile filters
+* Mobile checkout
+
+---
+
+# 33. MOBILE APP READY
+
+Structure the backend/API so a future:
+
+* Android app
+* iOS app
+
+can use the same APIs.
+
+---
+
+# 34. SEO
+
+Implement advanced SEO.
+
+Include:
+
+* SEO-friendly URLs
+* Metadata
+* Open Graph
+* Product structured data
+* Review structured data
+* Breadcrumb schema
+* Organization schema
+* FAQ schema
+* Sitemap
+* Robots.txt
+* Canonical URLs
+
+Generate unique metadata for products and categories.
+
+---
+
+# 35. PERFORMANCE
+
+Optimize for speed.
+
+Use:
+
+* Image optimization
+* Lazy loading
+* Code splitting
+* Caching
+* CDN-ready architecture
+* Server-side rendering where appropriate
+* Pagination
+* Infinite scrolling where appropriate
+* Optimized API calls
+
+Aim for excellent Core Web Vitals.
+
+---
+
+# 36. SECURITY
+
+Implement:
+
+* Secure authentication
+* Password hashing
+* CSRF protection
+* XSS protection
+* SQL injection prevention
+* Rate limiting
+* Input validation
+* Secure sessions
+* Role-based access control
+* Admin authorization
+* Seller authorization
+* Payment security
+* Secure API endpoints
+
+Roles:
+
+* Customer
+* Seller
+* Admin
+* Super Admin
+
+---
+
+# 37. ACCESSIBILITY
+
+Follow modern accessibility standards.
+
+Include:
+
+* Keyboard navigation
+* ARIA labels
+* Proper heading hierarchy
+* Accessible forms
+* High contrast
+* Screen-reader support
+* Focus states
+* Alt text
+* Reduced-motion support
+
+---
+
+# 38. DESIGN SYSTEM
+
+Create reusable components:
+
+* Buttons
+* Inputs
+* Selects
+* Modals
+* Dropdowns
+* Cards
+* Product cards
+* Badges
+* Toast notifications
+* Alerts
+* Tabs
+* Accordions
+* Tables
+* Pagination
+* Breadcrumbs
+* Carousels
+* Skeleton loaders
+* Dialogs
+
+Use consistent spacing, typography, shadows, borders, and responsive behavior.
+
+---
+
+# 39. ANIMATIONS
+
+Use subtle professional animations.
+
+Examples:
+
+* Product card hover
+* Button hover
+* Add-to-cart animation
+* Cart badge animation
+* Page transitions
+* Dropdown transitions
+* Modal transitions
+* Skeleton loading
+* Image zoom
+* Wishlist heart animation
+* Toast notifications
+
+Animations should be smooth and fast, never distracting.
+
+---
+
+# 40. EMPTY STATES
+
+Create polished empty states for:
+
+* Empty cart
+* Empty wishlist
+* No search results
+* No orders
+* No notifications
+* No addresses
+* No reviews
+* Empty seller inventory
+
+Each should include an illustration/icon and useful CTA.
+
+---
+
+# 41. ERROR STATES
+
+Create friendly error pages.
+
+Include:
+
+* 404 page
+* 500 page
+* Network error
+* Payment failed
+* Session expired
+* Product unavailable
+* Out of stock
+
+Provide useful recovery actions.
+
+---
+
+# 42. PRODUCT DATA
+
+Initially populate the website with realistic demo products from categories such as:
+
+### Smartphones
+
+* Apple
+* Samsung
+* OnePlus
+* Google
+* Xiaomi
+* Motorola
+
+### Laptops
+
+* Apple
+* Dell
+* HP
+* Lenovo
+* ASUS
+* Acer
+
+### Gaming
+
+* PlayStation
+* Xbox
+* Nintendo
+* Gaming PCs
+* Graphics cards
+* Gaming keyboards
+* Gaming mice
+
+### Audio
+
+* Sony
+* JBL
+* Bose
+* Sennheiser
+* Boat
+* Nothing
+
+### TVs
+
+* Samsung
+* LG
+* Sony
+* TCL
+* OnePlus
+* Xiaomi
+
+Use fictional/demo product data where necessary rather than presenting fake information as real.
+
+---
+
+# 43. INDIA-READY FEATURES
+
+Design the platform for Indian customers.
+
+Use:
+
+* ₹ INR currency
+* Indian PIN codes
+* Indian states
+* UPI
+* Razorpay-ready payment system
+* Cash on Delivery
+* GST invoice support
+* GSTIN fields
+* Indian address format
+* Indian phone number validation
+* Delivery by PIN code
+
+Display prices in Indian format, for example:
+
+₹79,999
+
+Use Indian number formatting:
+
+₹1,24,999
+
+---
+
+# 44. BUSINESS FEATURES
+
+Support:
+
+* GST invoices
+* Business accounts
+* Bulk orders
+* Corporate purchasing
+* Bulk pricing
+* Request quotation
+* Business customer dashboard
+* Purchase orders
+* Download invoices
+
+---
+
+# 45. ANALYTICS
+
+Create analytics architecture.
+
+Track:
+
+* Page views
+* Product views
+* Search queries
+* Add-to-cart events
+* Checkout starts
+* Purchases
+* Conversion rate
+* Revenue
+* Average order value
+* Abandoned carts
+* Wishlist activity
+
+Create admin analytics dashboards.
+
+---
+
+# 46. EMAIL TEMPLATES
+
+Create professional email templates for:
+
+* Welcome
+* Email verification
+* Password reset
+* Order confirmation
+* Payment confirmation
+* Shipping confirmation
+* Delivery confirmation
+* Cancellation
+* Refund
+* Return
+* Promotional offers
+
+---
+
+# 47. FOOTER
+
+Create a comprehensive footer.
+
+Columns:
+
+### About
+
+* About Prathemesh Electronics
+* Careers
+* Contact Us
+* Press
+
+### Customer Service
+
+* Help Center
+* Returns
+* Shipping
+* Warranty
+* Track Order
+
+### Policies
+
+* Privacy Policy
+* Terms
+* Refund Policy
+* Cookie Policy
+* Security
+
+### Sell With Us
+
+* Become a Seller
+* Seller Login
+* Seller Guide
+
+### Social
+
+* Instagram
+* Facebook
+* YouTube
+* X
+* LinkedIn
+
+Include:
+
+* Copyright
+* Payment icons
+* Security badge
+* App download buttons
+
+---
+
+# 48. HOMEPAGE ORDER
+
+Structure the homepage approximately as:
+
+1. Top announcement bar
+2. Main header
+3. Navigation
+4. Hero carousel
+5. Category shortcuts
+6. Flash deals
+7. Best sellers
+8. Featured brands
+9. Electronics deals
+10. Smartphones
+11. Laptops
+12. Gaming
+13. Audio
+14. Smart home
+15. Recently viewed
+16. Recommended products
+17. Promotional banner
+18. Customer benefits
+19. Newsletter
+20. Footer
+
+---
+
+# 49. CUSTOMER BENEFITS SECTION
+
+Display:
+
+* 🚚 Fast Delivery
+* 🔒 Secure Payments
+* ↩ Easy Returns
+* 🛡 Genuine Products
+* 💬 24/7 Support
+* 💳 Multiple Payment Options
+
+---
+
+# 50. USER EXPERIENCE
+
+Prioritize:
+
+* Fast navigation
+* Clear pricing
+* Easy product discovery
+* Minimal checkout friction
+* Trust signals
+* Product transparency
+* Excellent mobile experience
+* Clear CTAs
+* Accessible interface
+
+Do not overcrowd the UI.
+
+---
+
+# 51. SEARCH PAGE
+
+Create a dedicated search-results experience.
+
+Example:
+
+Search:
+“Gaming Laptop”
+
+Display:
+
+**Gaming Laptop — 2,348 results**
+
+Left sidebar:
+
+* Filters
+
+Main area:
+
+* Sort dropdown
+* Product count
+* Product grid
+
+Include:
+
+* Breadcrumb
+* Related categories
+* Suggested searches
+* Recommended products
+
+---
+
+# 52. CATEGORY PAGE
+
+Category page should include:
+
+* Breadcrumb
+* Category banner
+* Category description
+* Subcategories
+* Featured brands
+* Popular products
+* Filters
+* Sorting
+* Product grid
+* Pagination/infinite loading
+* SEO content
+
+---
+
+# 53. DEALS AND PROMOTIONS
+
+Allow administrators to schedule promotions.
+
+Each promotion should support:
+
+* Start date
+* End date
+* Products
+* Categories
+* Discount
+* Banner
+* Coupon
+* Maximum usage
+* Customer eligibility
+
+---
+
+# 54. MULTI-LANGUAGE READY
+
+Build the architecture so additional languages can be added later.
+
+Initial language:
+**English**
+
+Prepare internationalization support.
+
+---
+
+# 55. DARK MODE
+
+Include optional dark mode.
+
+Dark mode should preserve:
+
+* Accessibility
+* Contrast
+* Product image visibility
+* Readability
+* Consistent branding
+
+Allow users to switch between:
+
+* Light
+* Dark
+* System
+
+---
+
+# 56. DATABASE MODELS
+
+Create scalable models for:
+
+* Users
+* Roles
+* Addresses
+* Products
+* ProductVariants
+* Categories
+* Brands
+* Sellers
+* Inventory
+* Orders
+* OrderItems
+* Payments
+* Shipments
+* Reviews
+* Wishlists
+* Cart
+* Coupons
+* Promotions
+* Returns
+* Refunds
+* Notifications
+* SupportTickets
+* SearchHistory
+* RecentlyViewed
+* ProductComparisons
+
+Define proper relationships and indexes.
+
+---
+
+# 57. ADMIN URL STRUCTURE
+
+Use routes such as:
+
+/admin
+/admin/products
+/admin/products/new
+/admin/orders
+/admin/customers
+/admin/sellers
+/admin/categories
+/admin/coupons
+/admin/promotions
+/admin/inventory
+/admin/reviews
+/admin/analytics
+/admin/settings
+
+---
+
+# 58. CUSTOMER URL STRUCTURE
+
+Use routes such as:
+
+/
+/products
+/product/[slug]
+/category/[slug]
+/search
+/cart
+/checkout
+/orders
+/order/[id]
+/wishlist
+/account
+/account/profile
+/account/addresses
+/account/settings
+/compare
+/deals
+/help
+/contact
+
+---
+
+# 59. SELLER URL STRUCTURE
+
+Use:
+
+/seller
+/seller/products
+/seller/products/new
+/seller/orders
+/seller/inventory
+/seller/analytics
+/seller/reviews
+/seller/payouts
+/seller/settings
+
+---
+
+# 60. FINAL QUALITY REQUIREMENTS
+
+The finished website must look like a real commercial electronics marketplace, not a basic demo.
+
+It should have:
+
+* Professional UI
+* Realistic demo data
+* Functional navigation
+* Functional cart
+* Functional wishlist
+* Functional search
+* Functional filtering
+* Functional product pages
+* Functional checkout flow
+* Authentication architecture
+* Admin dashboard
+* Seller dashboard
+* Responsive design
+* Mobile-first behavior
+* Loading states
+* Error states
+* Empty states
+* SEO
+* Accessibility
+* Security best practices
+* Scalable architecture
+
+Use reusable components rather than duplicating code.
+
+Keep the code clean, maintainable, modular, and production-ready.
+
+Where an external service such as payments, email, SMS, maps, shipping, or authentication requires API credentials, create a proper integration layer and environment-variable configuration rather than hardcoding secrets.
+
+Create a polished initial homepage and populate it with realistic demo products so the website looks complete immediately after launch.
+
+The final result should be a **premium electronics e-commerce platform called Prathemesh Electronics**, designed for Indian customers and capable of being expanded into a full-scale marketplace.

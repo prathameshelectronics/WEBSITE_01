@@ -1,0 +1,300 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: catalog
+    description: Storefront catalog operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /storefront/home:
+    get:
+      operationId: getStorefrontHome
+      tags: [catalog]
+      summary: Get storefront home content
+      description: Returns the curated catalog content used to render the storefront home page.
+      responses:
+        "200":
+          description: Storefront home content
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HomeData"
+  /products:
+    get:
+      operationId: listProducts
+      tags: [catalog]
+      summary: List catalog products
+      description: Returns products with optional text and category filters.
+      parameters:
+        - name: q
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 12
+      responses:
+        "200":
+          description: Matching products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+  /products/{slug}:
+    get:
+      operationId: getProductBySlug
+      tags: [catalog]
+      summary: Get a product by slug
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Product details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /categories:
+    get:
+      operationId: listCategories
+      tags: [catalog]
+      summary: List product categories
+      responses:
+        "200":
+          description: Catalog categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Category"
+  /deals:
+    get:
+      operationId: listDeals
+      tags: [catalog]
+      summary: List active deals
+      responses:
+        "200":
+          description: Active promotions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Deal"
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        brand:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+        categoryLabel:
+          type: string
+        description:
+          type: string
+        specs:
+          type: array
+          items:
+            type: string
+        image:
+          type: string
+        gallery:
+          type: array
+          items:
+            type: string
+        price:
+          type: integer
+        mrp:
+          type: integer
+        discount:
+          type: integer
+        rating:
+          type: number
+          format: double
+        reviewCount:
+          type: integer
+        badge:
+          type: ["string", "null"]
+        badgeTone:
+          type: ["string", "null"]
+        emi:
+          type: string
+        delivery:
+          type: string
+        stock:
+          type: integer
+        color:
+          type: string
+        warranty:
+          type: string
+        featured:
+          type: boolean
+      required:
+        - id
+        - slug
+        - brand
+        - name
+        - category
+        - categoryLabel
+        - description
+        - specs
+        - image
+        - gallery
+        - price
+        - mrp
+        - discount
+        - rating
+        - reviewCount
+        - badge
+        - badgeTone
+        - emi
+        - delivery
+        - stock
+        - color
+        - warranty
+        - featured
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        slug:
+          type: string
+        name:
+          type: string
+        count:
+          type: integer
+        image:
+          type: string
+        accent:
+          type: string
+      required:
+        - id
+        - slug
+        - name
+        - count
+        - image
+        - accent
+    Deal:
+      type: object
+      properties:
+        id:
+          type: string
+        eyebrow:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        cta:
+          type: string
+        accent:
+          type: string
+        productSlugs:
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - eyebrow
+        - title
+        - description
+        - cta
+        - accent
+        - productSlugs
+    HomeData:
+      type: object
+      properties:
+        heroProducts:
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
+        featuredProducts:
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
+        categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/Category"
+        deals:
+          type: array
+          items:
+            $ref: "#/components/schemas/Deal"
+        brands:
+          type: array
+          items:
+            type: string
+      required:
+        - heroProducts
+        - featuredProducts
+        - categories
+        - deals
+        - brands
+

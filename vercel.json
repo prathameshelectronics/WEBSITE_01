@@ -1,0 +1,12 @@
+{
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm --filter @workspace/prathemesh-electronics run build",
+  "outputDirectory": "artifacts/prathemesh-electronics/dist/public",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/((?!assets/|favicon.svg|robots.txt).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

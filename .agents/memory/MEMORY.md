@@ -1,0 +1,1 @@
+- [Storefront architecture](storefront-architecture.md) — keep the first release catalog-API-backed while cart and wishlist remain client-side until auth and persistence are added.

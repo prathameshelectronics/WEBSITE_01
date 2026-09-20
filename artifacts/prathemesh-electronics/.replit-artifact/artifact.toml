@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Prathemesh Electronics"
+description = "A premium India-ready electronics marketplace storefront with curated products, search, wishlist, cart, and product discovery experiences."
+version = "1.0.0"
+id = "artifacts/prathemesh-electronics"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22625
+
+[services.development]
+run = "pnpm --filter @workspace/prathemesh-electronics run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/prathemesh-electronics", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/prathemesh-electronics/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22625"
+BASE_PATH = "/"
