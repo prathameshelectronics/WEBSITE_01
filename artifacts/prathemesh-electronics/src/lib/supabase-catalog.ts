@@ -59,7 +59,7 @@ type DealRow = {
 
 let supabase: SupabaseClient | null = null;
 
-function getSupabase() {
+export function getSupabaseClient() {
   const url = import.meta.env.VITE_SUPABASE_URL;
   const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
   if (!url || !anonKey) return null;
@@ -120,7 +120,7 @@ async function listProducts(params?: {
   category?: string;
   limit?: number;
 }) {
-  const client = getSupabase();
+  const client = getSupabaseClient();
   if (!client) {
     const query = new URLSearchParams();
     if (params?.q) query.set('q', params.q);
@@ -158,7 +158,7 @@ async function listProducts(params?: {
 }
 
 async function getProductBySlug(slug: string) {
-  const client = getSupabase();
+  const client = getSupabaseClient();
   if (!client) return fetchReplitCatalog<Product>(`/products/${encodeURIComponent(slug)}`);
   const { data, error } = await client
     .from('products')
@@ -174,7 +174,7 @@ async function getProductBySlug(slug: string) {
 }
 
 async function listCategories() {
-  const client = getSupabase();
+  const client = getSupabaseClient();
   if (!client) return fetchReplitCatalog<Category[]>('/categories');
   const { data, error } = await client
     .from('categories')
@@ -188,7 +188,7 @@ async function listCategories() {
 }
 
 async function listDeals() {
-  const client = getSupabase();
+  const client = getSupabaseClient();
   if (!client) return fetchReplitCatalog<Deal[]>('/deals');
   const { data, error } = await client
     .from('deals')
@@ -210,7 +210,7 @@ async function listDeals() {
 }
 
 async function listBrands() {
-  const client = getSupabase();
+  const client = getSupabaseClient();
   if (!client) {
     const home = await fetchReplitCatalog<HomeData>('/storefront/home');
     return home.brands;

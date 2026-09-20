@@ -5,7 +5,8 @@ Prathemesh Electronics is a premium India-ready electronics marketplace storefro
 ## Run & Operate
 
 - `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
-- `/admin` — open the catalog operations workspace from the storefront
+- `/admin/login` — Supabase Auth entry point for administrators
+- `/admin` — protected catalog operations workspace after an admin role check
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
@@ -36,7 +37,8 @@ Prathemesh Electronics is a premium India-ready electronics marketplace storefro
 
 - The initial build prioritizes a complete, functional storefront before expanding into seller and admin surfaces.
 - Catalog reads use Supabase directly so the static Vite app can run on Vercel and other hosts; Replit's API remains a compatibility fallback until the Supabase catalog tables are created.
-- When Supabase credentials are not configured, the storefront and admin workspace read the seeded catalog through the Replit API fallback; admin edits are preview-only and remain in browser state.
+- When Supabase credentials are not configured, the storefront reads the seeded catalog through the Replit API fallback and the admin login stays disabled.
+- Admin access requires a Supabase Auth user plus a matching `profiles` row with `role = 'admin'`; run `supabase/schema.sql` and add that role only after creating the user in Supabase Auth.
 - Cart and wishlist are client-side first-build state so the shopping experience works without authentication.
 - Product imagery uses curated remote image assets while the catalog model remains ready for persistent storage and object storage later.
 

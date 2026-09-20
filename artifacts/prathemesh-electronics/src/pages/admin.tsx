@@ -5,6 +5,7 @@ import {
   Check,
   CircleAlert,
   LayoutDashboard,
+  LogOut,
   Pencil,
   Plus,
   Search,
@@ -16,6 +17,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'wouter';
 import { useListCategories, useListProducts, type Product } from '@/lib/supabase-catalog';
+import { useAdminAuth } from '@/lib/admin-auth';
 
 type FormState = {
   name: string;
@@ -175,6 +177,7 @@ function AdminFormModal({
 }
 
 export default function AdminPage() {
+  const { user, signOut } = useAdminAuth();
   const productsQuery = useListProducts({ limit: 50 });
   const categoriesQuery = useListCategories();
   const [products, setProducts] = useState<Product[]>([]);
@@ -285,7 +288,8 @@ export default function AdminPage() {
             <button className={activeView === 'inventory' ? 'active' : ''} onClick={() => setActiveView('inventory')}><Boxes size={16} /> Inventory <span>{products.length}</span></button>
             <button onClick={() => setNotice('Settings will be available when admin authentication is connected.')}><Settings2 size={16} /> Settings</button>
           </nav>
-          <div className="admin-sidebar-note"><Sparkles size={16} /><strong>Preview workspace</strong><p>Catalog edits stay in this browser until Supabase admin writes are connected.</p></div>
+          <div className="admin-sidebar-note"><Sparkles size={16} /><strong>Operations workspace</strong><p>Catalog reads are live. Product writes will persist when the Supabase admin policies are enabled.</p></div>
+          <div className="admin-sidebar-user"><span>{user?.email?.slice(0, 1).toUpperCase() ?? 'A'}</span><div><strong>{user?.email ?? 'Admin account'}</strong><small>Administrator</small></div><button onClick={() => void signOut()} aria-label="Sign out"><LogOut size={15} /></button></div>
         </aside>
         <section className="admin-content">
           <header className="admin-topbar">
@@ -293,7 +297,7 @@ export default function AdminPage() {
             <button className="button button-primary" onClick={openNewProduct}><Plus size={16} /> Add product</button>
           </header>
 
-          <div className="admin-status"><span className="admin-status-dot" /> Catalog API connected <span>•</span> {productsQuery.isLoading ? 'Syncing products…' : `${products.length} products loaded`} <span className="admin-status-mode">Supabase writes pending credentials</span></div>
+          <div className="admin-status"><span className="admin-status-dot" /> Catalog API connected <span>•</span> {productsQuery.isLoading ? 'Syncing products…' : `${products.length} products loaded`} <span className="admin-status-mode">Admin session verified</span></div>
 
           {activeView === 'overview' ? (
             <>

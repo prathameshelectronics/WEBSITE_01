@@ -3,12 +3,14 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useGetProductBySlug, useGetStorefrontHome, useListCategories, useListDeals, useListProducts } from '@/lib/supabase-catalog';
 import type { Category, Deal, Product } from '@/lib/supabase-catalog';
 import { Heart, Search, ShoppingBag, ArrowRight, ChevronRight, Minus, Plus, Trash2, ShieldCheck, Truck, RotateCcw, Headphones, Star, X, CircleAlert, PackageOpen, SlidersHorizontal, Sparkles, MapPin, LockKeyhole } from 'lucide-react';
-import { Link, Route, Switch, useLocation, useParams, Router as WouterRouter } from 'wouter';
+import { Link, Redirect, Route, Switch, useLocation, useParams, Router as WouterRouter } from 'wouter';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
 import AdminPage from '@/pages/admin';
+import AdminLoginPage from '@/pages/admin-login';
+import { AdminAuthProvider, useAdminAuth } from '@/lib/admin-auth';
 
 const queryClient = new QueryClient();
 const formatINR = (value: number) => new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(value);
@@ -98,7 +100,6 @@ function Header() {
         <nav className="header-nav" aria-label="Main navigation">
           <Link href="/products" className="header-link" data-testid="link-products"><PackageOpen size={17} /><span>Shop</span></Link>
           <Link href="/deals" className="header-link" data-testid="link-deals"><Sparkles size={17} /><span>Deals</span></Link>
-          <Link href="/admin" className="header-link" data-testid="link-admin"><ShieldCheck size={17} /><span>Admin</span></Link>
           <Link href="/cart" className="header-link cart-link" data-testid="link-cart"><ShoppingBag size={18} /><span>Cart</span>{cartCount > 0 && <b className="cart-count">{cartCount}</b>}</Link>
         </nav>
       </div>
@@ -268,11 +269,26 @@ function CartPage() {
 
 function Router() {
   const [location] = useLocation();
-  return <ErrorBoundary resetKey={location}><Switch><Route path="/" component={Home} /><Route path="/products" component={ProductsPage} /><Route path="/product/:slug" component={ProductPage} /><Route path="/deals" component={DealsPage} /><Route path="/cart" component={CartPage} /><Route path="/admin" component={AdminPage} /><Route component={NotFound} /></Switch></ErrorBoundary>;
+  return <ErrorBoundary resetKey={location}><Switch><Route path="/" component={Home} /><Route path="/products" component={ProductsPage} /><Route path="/product/:slug" component={ProductPage} /><Route path="/deals" component={DealsPage} /><Route path="/cart" component={CartPage} /><Route path="/admin/login" component={AdminLoginPage} /><Route path="/admin" component={ProtectedAdminRoute} /><Route path="/admin/:rest*" component={ProtectedAdminRoute} /><Route component={NotFound} /></Switch></ErrorBoundary>;
+}
+
+function ProtectedAdminRoute() {
+  const { status } = useAdminAuth();
+  if (status === 'checking') return <main className="admin-auth-loading"><div className="skeleton" /><p>Checking admin access…</p></main>;
+  if (status === 'signed_out' || status === 'unconfigured') return <Redirect to="/admin/login" />;
+  if (status === 'not_admin') return <Redirect to="/" />;
+  if (status === 'error') return <main className="admin-auth-loading"><CircleAlert size={26} /><h1>Admin access needs setup.</h1><p>Ask a project owner to assign this Supabase account the admin role.</p><Link href="/" className="button button-dark">Return to storefront</Link></main>;
+  return <AdminPage />;
+}
+
+function AppFrame() {
+  const [location] = useLocation();
+  const isAdminRoute = location.startsWith('/admin');
+  return <ShopProvider>{!isAdminRoute && <Header />}<Router />{!isAdminRoute && <Footer />}</ShopProvider>;
 }
 
 function App() {
-  return <QueryClientProvider client={queryClient}><TooltipProvider><WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}><ShopProvider><Header /><Router /><Footer /></ShopProvider></WouterRouter><Toaster /></TooltipProvider></QueryClientProvider>;
+  return <QueryClientProvider client={queryClient}><AdminAuthProvider><TooltipProvider><WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}><AppFrame /></WouterRouter><Toaster /></TooltipProvider></AdminAuthProvider></QueryClientProvider>;
 }
 
 export default App;

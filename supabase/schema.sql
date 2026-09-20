@@ -52,6 +52,16 @@ create table if not exists public.brands (
   name text unique not null
 );
 
+alter table public.products add column if not exists active boolean not null default true;
+
+create table if not exists public.profiles (
+  id uuid primary key references auth.users(id) on delete cascade,
+  email text,
+  name text,
+  role text not null default 'customer' check (role in ('customer', 'admin')),
+  created_at timestamptz not null default now()
+);
+
 create index if not exists products_category_idx on public.products (category);
 create index if not exists products_featured_idx on public.products (featured);
 create index if not exists products_slug_idx on public.products (slug);
@@ -60,22 +70,95 @@ alter table public.products enable row level security;
 alter table public.categories enable row level security;
 alter table public.deals enable row level security;
 alter table public.brands enable row level security;
+alter table public.profiles enable row level security;
+
+create or replace function public.is_admin()
+returns boolean
+language sql
+security definer
+set search_path = public
+as $$
+  select exists (
+    select 1
+    from public.profiles
+    where id = auth.uid() and role = 'admin'
+  );
+$$;
+
+revoke all on function public.is_admin() from public;
+grant execute on function public.is_admin() to authenticated;
 
 drop policy if exists "Public catalog read" on public.products;
 create policy "Public catalog read" on public.products
-  for select to anon, authenticated using (true);
+  for select to anon, authenticated using (active = true or public.is_admin());
+
+drop policy if exists "Admin catalog insert" on public.products;
+create policy "Admin catalog insert" on public.products
+  for insert to authenticated with check (public.is_admin());
+
+drop policy if exists "Admin catalog update" on public.products;
+create policy "Admin catalog update" on public.products
+  for update to authenticated using (public.is_admin()) with check (public.is_admin());
+
+drop policy if exists "Admin catalog delete" on public.products;
+create policy "Admin catalog delete" on public.products
+  for delete to authenticated using (public.is_admin());
 
 drop policy if exists "Public category read" on public.categories;
 create policy "Public category read" on public.categories
   for select to anon, authenticated using (true);
 
+drop policy if exists "Admin category insert" on public.categories;
+create policy "Admin category insert" on public.categories
+  for insert to authenticated with check (public.is_admin());
+
+drop policy if exists "Admin category update" on public.categories;
+create policy "Admin category update" on public.categories
+  for update to authenticated using (public.is_admin()) with check (public.is_admin());
+
+drop policy if exists "Admin category delete" on public.categories;
+create policy "Admin category delete" on public.categories
+  for delete to authenticated using (public.is_admin());
+
 drop policy if exists "Public deal read" on public.deals;
 create policy "Public deal read" on public.deals
   for select to anon, authenticated using (true);
 
+drop policy if exists "Admin deal insert" on public.deals;
+create policy "Admin deal insert" on public.deals
+  for insert to authenticated with check (public.is_admin());
+
+drop policy if exists "Admin deal update" on public.deals;
+create policy "Admin deal update" on public.deals
+  for update to authenticated using (public.is_admin()) with check (public.is_admin());
+
+drop policy if exists "Admin deal delete" on public.deals;
+create policy "Admin deal delete" on public.deals
+  for delete to authenticated using (public.is_admin());
+
 drop policy if exists "Public brand read" on public.brands;
 create policy "Public brand read" on public.brands
   for select to anon, authenticated using (true);
+
+drop policy if exists "Admin brand insert" on public.brands;
+create policy "Admin brand insert" on public.brands
+  for insert to authenticated with check (public.is_admin());
+
+drop policy if exists "Admin brand update" on public.brands;
+create policy "Admin brand update" on public.brands
+  for update to authenticated using (public.is_admin()) with check (public.is_admin());
+
+drop policy if exists "Admin brand delete" on public.brands;
+create policy "Admin brand delete" on public.brands
+  for delete to authenticated using (public.is_admin());
+
+drop policy if exists "Users can read their profile" on public.profiles;
+create policy "Users can read their profile" on public.profiles
+  for select to authenticated using (id = auth.uid());
+
+drop policy if exists "Admins can read profiles" on public.profiles;
+create policy "Admins can read profiles" on public.profiles
+  for select to authenticated using (public.is_admin());
 
 insert into public.products (
   id, slug, brand, name, category, category_label, description, specs, image, gallery,

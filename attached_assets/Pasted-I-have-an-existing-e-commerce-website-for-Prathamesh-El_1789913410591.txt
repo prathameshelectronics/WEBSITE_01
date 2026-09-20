@@ -1,0 +1,690 @@
+I have an existing e-commerce website for **Prathamesh Electronics & Electricals** built in this Replit project.
+
+I already have a customer-facing website and an admin page. I want you to restructure and connect them properly without unnecessarily rebuilding or breaking the existing customer website.
+
+## MAIN GOAL
+
+Create a professional e-commerce architecture similar in concept to large e-commerce websites such as Amazon:
+
+* Customers see ONLY the normal shopping website.
+* Admins have a completely separate, professional admin dashboard.
+* Customers must NEVER be able to access or see the admin dashboard.
+* The admin dashboard must require a secure login.
+* The customer website and admin dashboard must use the same Supabase backend/database.
+* Products, inventory, orders, customers, categories, etc. must be managed through the admin dashboard and reflected automatically on the customer website.
+
+Do NOT copy Amazon's branding, design, logo, or copyrighted UI. I only want a similar separation between the customer storefront and administration system.
+
+---
+
+# 1. CUSTOMER WEBSITE
+
+Keep the existing customer website and its current design/functionality wherever possible.
+
+The customer side should contain things such as:
+
+* Home
+* Products
+* Categories
+* Product details
+* Search
+* Cart
+* Checkout
+* Customer account
+* Orders
+* Order tracking
+* Contact
+* About
+* Other existing customer pages
+
+Customers should NEVER see:
+
+* Admin dashboard
+* Admin navigation
+* Admin controls
+* Product management controls
+* Order management controls
+* Customer management controls
+* Admin settings
+
+Do not put an "Admin" button or admin link in the public navigation.
+
+---
+
+# 2. ADMIN LOGIN
+
+Create a completely separate admin login page.
+
+Use a route such as:
+
+/admin/login
+
+The login page should be simple, clean and professional.
+
+Example:
+
+---
+
+Prathamesh Electronics
+Admin Login
+
+Email
+[________________]
+
+Password
+[________________]
+
+[ Login ]
+
+## Forgot password?
+
+Do NOT use the customer login page for administrators.
+
+The admin login must use **Supabase Authentication**.
+
+Do not store admin passwords in:
+
+* localStorage
+* frontend code
+* environment variables
+* plain database fields
+* hardcoded JavaScript
+
+Use Supabase Auth securely.
+
+---
+
+# 3. ADMIN ROUTES
+
+Create a completely separate admin section.
+
+Use routes such as:
+
+/admin/login
+/admin
+/admin/dashboard
+/admin/products
+/admin/categories
+/admin/orders
+/admin/customers
+/admin/inventory
+/admin/offers
+/admin/settings
+
+You can adjust the exact routes based on the existing project structure.
+
+The admin layout should be completely different from the customer website.
+
+For example:
+
+ADMIN SIDEBAR
+
+Dashboard
+Products
+Categories
+Orders
+Customers
+Inventory
+Offers
+Settings
+Logout
+
+Main content area:
+
+## Dashboard
+
+Total Sales
+Total Orders
+Products
+Customers
+
+Recent Orders
+
+Low Stock Products
+
+etc.
+
+---
+
+# 4. ADMIN AUTHENTICATION AND AUTHORIZATION
+
+This is extremely important.
+
+Do NOT rely only on hiding the admin page or checking a frontend variable.
+
+For example, this is NOT sufficient:
+
+if (user.email === "[admin@example.com](mailto:admin@example.com)") {
+showAdmin();
+}
+
+Customers must not be able to bypass security by manually entering:
+
+/admin
+/admin/products
+/admin/orders
+
+into the browser.
+
+Every protected admin route must verify that the currently authenticated Supabase user is actually an authorized administrator.
+
+If an unauthenticated user visits:
+
+/admin
+
+redirect them to:
+
+/admin/login
+
+If a normal customer is authenticated but is NOT an admin, they must be denied access and redirected to the customer website.
+
+Example:
+
+Customer:
+
+/admin
+↓
+ACCESS DENIED
+↓
+Redirect to /
+
+Admin:
+
+/admin
+↓
+Admin authentication verified
+↓
+Admin dashboard
+
+---
+
+# 5. ADMIN ROLE
+
+Implement a proper admin role using Supabase.
+
+Prefer a secure database-backed role system.
+
+For example, create/use a profiles or user_roles table such as:
+
+profiles
+
+id
+email
+name
+role
+created_at
+
+where role can be:
+
+customer
+admin
+
+If the project already has a suitable users/profile/roles table, use the existing structure instead of creating duplicate tables.
+
+IMPORTANT:
+
+Do not trust a role value supplied directly by the browser.
+
+Configure Supabase Row Level Security (RLS) so customers cannot simply modify their own role from:
+
+customer
+
+to:
+
+admin
+
+The admin role must be controlled securely.
+
+---
+
+# 6. ADMIN DASHBOARD
+
+Create a professional admin dashboard.
+
+The dashboard should have a completely different layout from the customer website.
+
+Suggested layout:
+
+┌──────────────────────────────────────────────┐
+│ Prathamesh Electronics Admin      Admin ▼   │
+├──────────────┬───────────────────────────────┤
+│              │                               │
+│ Dashboard    │ Dashboard                     │
+│              │                               │
+│ Products     │ Total Products                │
+│              │ Total Orders                  │
+│ Categories   │ Total Customers               │
+│              │ Revenue                       │
+│ Orders       │                               │
+│              │ Recent Orders                 │
+│ Customers    │                               │
+│              │ Low Stock                     │
+│ Inventory    │                               │
+│              │                               │
+│ Offers       │                               │
+│              │                               │
+│ Settings     │                               │
+│              │                               │
+│ Logout       │                               │
+└──────────────┴───────────────────────────────┘
+
+Make the admin UI responsive for desktop, tablet and mobile.
+
+---
+
+# 7. PRODUCT MANAGEMENT
+
+Admin should be able to:
+
+* Add products
+* Edit products
+* Delete/deactivate products
+* Change price
+* Change sale price
+* Upload product images
+* Change product description
+* Change category
+* Change brand
+* Change SKU
+* Change stock quantity
+* Mark products active/inactive
+* Mark products featured
+* Manage product specifications
+
+Changes made in the admin panel must automatically appear on the customer website.
+
+Example:
+
+Admin changes:
+
+Samsung TV
+₹55,000 → ₹49,999
+
+The customer website should automatically display:
+
+₹49,999
+
+Do not maintain a separate hardcoded product list for the customer website.
+
+---
+
+# 8. INVENTORY
+
+Create proper inventory management.
+
+Admin should be able to see:
+
+Product
+SKU
+Stock
+Low stock
+Out of stock
+
+Example:
+
+Samsung TV        5
+LG Refrigerator   2
+Usha Fan          18
+Mixer Grinder     0
+
+Products with zero stock should automatically be marked unavailable/out of stock on the customer website according to the existing shopping logic.
+
+---
+
+# 9. ORDER MANAGEMENT
+
+Customer orders must be stored in Supabase.
+
+Admin should have:
+
+/admin/orders
+
+Display:
+
+Order ID
+Customer
+Date
+Items
+Total
+Payment status
+Order status
+
+Allow admin to update order status.
+
+Example:
+
+Pending
+Confirmed
+Processing
+Packed
+Shipped
+Out for Delivery
+Delivered
+Cancelled
+
+The customer should be able to see their own order status.
+
+Customers must NEVER be able to see another customer's orders.
+
+---
+
+# 10. CUSTOMER MANAGEMENT
+
+Admin should have:
+
+/admin/customers
+
+Display appropriate customer information such as:
+
+Name
+Email
+Phone
+Number of orders
+Total orders value
+Account creation date
+
+Do not expose unnecessary sensitive information.
+
+Customers should only be able to access their own account/order information.
+
+---
+
+# 11. CATEGORIES
+
+Admin should be able to:
+
+* Create category
+* Edit category
+* Delete/deactivate category
+* Assign products to categories
+
+Examples:
+
+Televisions
+Refrigerators
+Home Theater
+Fans
+Coolers
+Mixer Grinders
+Electrical Materials
+Lighting
+Car Music Systems
+Tractor Music Systems
+Set Top Boxes
+Dish Connections
+Home Installation
+Accessories
+
+Use the existing categories if they already exist in the project.
+
+---
+
+# 12. SUPABASE
+
+Use the existing Supabase project and existing environment variables.
+
+Do NOT expose:
+
+* service_role key
+* database password
+* private API keys
+
+in frontend code.
+
+The browser should only use the appropriate public Supabase credentials.
+
+If server-side operations require privileged access, keep those credentials server-side.
+
+Review the existing Supabase implementation before changing it.
+
+---
+
+# 13. ROW LEVEL SECURITY
+
+Review and correctly configure Supabase RLS.
+
+Customer permissions should be approximately:
+
+PRODUCTS:
+
+* Read active products
+
+ORDERS:
+
+* Create their own orders
+* Read only their own orders
+
+PROFILES:
+
+* Read/update their own profile where appropriate
+
+ADMIN:
+
+* Admin users can manage products
+* Admin users can manage categories
+* Admin users can manage orders
+* Admin users can manage inventory
+* Admin users can access appropriate customer information
+
+A normal customer must NOT be able to modify admin-controlled data.
+
+Do not disable RLS just to make the application work.
+
+---
+
+# 14. PROTECT ALL ADMIN ROUTES
+
+Create an AdminRoute/ProtectedAdminRoute mechanism.
+
+Every admin page must be protected, including:
+
+/admin
+/admin/dashboard
+/admin/products
+/admin/categories
+/admin/orders
+/admin/customers
+/admin/inventory
+/admin/offers
+/admin/settings
+
+Do not only protect /admin.
+
+If someone manually types:
+
+/admin/products
+
+without being an admin, they must not get access.
+
+---
+
+# 15. LOGOUT
+
+Add a proper admin logout.
+
+When the admin clicks Logout:
+
+* Sign out through Supabase Auth
+* Clear the authenticated session appropriately
+* Redirect to /admin/login
+
+Do not merely delete a localStorage variable.
+
+---
+
+# 16. SESSION HANDLING
+
+The application should correctly handle:
+
+* Page refresh
+* Browser restart
+* Expired sessions
+* Logout
+* Unauthorized access
+* Direct URL access
+
+Do not make the admin log in again unnecessarily on every page refresh if Supabase's valid session is still active.
+
+---
+
+# 17. DO NOT BREAK EXISTING WEBSITE
+
+Before making changes:
+
+1. Inspect the existing project.
+2. Identify the current frontend framework.
+3. Identify the existing Supabase integration.
+4. Identify existing database tables.
+5. Identify existing customer routes.
+6. Identify existing admin routes.
+7. Reuse existing functionality wherever possible.
+
+Do NOT blindly create duplicate tables or duplicate authentication systems.
+
+Do NOT replace working components unless necessary.
+
+Do NOT remove existing customer functionality.
+
+---
+
+# 18. IMPORTANT SECURITY RULE
+
+Hiding admin links is NOT security.
+
+This is NOT enough:
+
+display: none;
+
+or:
+
+if (isAdmin) showAdminLink();
+
+The backend/database must also enforce permissions.
+
+A customer who knows the URL must still be unable to access or modify admin functionality.
+
+Test these scenarios:
+
+TEST 1:
+Open /admin while logged out
+→ Must redirect to /admin/login
+
+TEST 2:
+Log in as normal customer
+→ Open /admin
+→ Must be denied
+
+TEST 3:
+Normal customer directly opens:
+/admin/products
+→ Must be denied
+
+TEST 4:
+Normal customer attempts to modify a product through Supabase/API
+→ Must be rejected by authorization/RLS
+
+TEST 5:
+Admin logs in
+→ /admin works
+
+TEST 6:
+Admin opens /admin/products
+→ Works
+
+TEST 7:
+Admin logs out
+→ /admin becomes inaccessible
+
+TEST 8:
+Customer opens normal website
+→ Customer website works normally
+
+---
+
+# 19. DESIGN
+
+Customer website:
+
+Keep the existing customer-facing design.
+
+Admin website:
+
+Use a professional dashboard design.
+
+It should feel like a real e-commerce management system rather than another copy of the storefront.
+
+Use:
+
+* Sidebar navigation
+* Dashboard cards
+* Tables
+* Search
+* Filters
+* Pagination where needed
+* Modal/dialogs
+* Confirmation dialogs for destructive actions
+* Toast notifications
+* Loading states
+* Empty states
+* Error states
+* Responsive design
+
+Keep the design clean and professional.
+
+---
+
+# 20. FINAL ARCHITECTURE
+
+The final application should conceptually work like:
+
+CUSTOMER
+
+/
+↓
+Customer Website
+↓
+Supabase
+↓
+Products / Cart / Orders / Customer Account
+
+ADMIN
+
+/admin/login
+↓
+Supabase Authentication
+↓
+Verify admin role
+↓
+Admin Dashboard
+↓
+Supabase
+↓
+Products / Orders / Customers / Inventory / Categories
+
+The customer and admin systems should share the same backend/database but have completely different interfaces and permissions.
+
+---
+
+# 21. BEFORE FINISHING
+
+After implementation:
+
+* Check all routes.
+* Check authentication.
+* Check admin authorization.
+* Check RLS.
+* Check product CRUD.
+* Check customer product visibility.
+* Check order creation.
+* Check admin order management.
+* Check customer order visibility.
+* Check logout.
+* Check direct URL access.
+* Check mobile responsiveness.
+* Check for console errors.
+* Check for TypeScript errors.
+* Check that no service-role/private credentials are exposed to the browser.
+
+If you discover an existing implementation that is already correct, preserve it instead of replacing it.
+
+Most importantly: **do not just visually hide the admin page. Implement actual authentication and authorization so customers cannot access the admin system even if they know the URL.**
